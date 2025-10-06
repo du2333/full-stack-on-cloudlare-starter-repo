@@ -16,15 +16,15 @@
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_id": "c3a446b9-c6ca-48cb-8bf6-832d2eef6090",
+			"database_id": "0855e5ae-a31b-4bee-b180-119d0bc2a8a8",
 			"remote": true
 		}
 	],
 	"kv_namespaces": [
 		{
 			"binding": "CACHE",
-			"id": "c2e11b9e7de44c2b9d4574f5cc4866fb",
+			"id": "5e57ce657a454fbea10b9519437c335e",
 			"remote": true
 		}
-	]
+	],
 }
