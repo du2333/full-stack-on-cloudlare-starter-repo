@@ -13,8 +13,8 @@ export async function collectDestinationInfo(env: Env, destinationUrl: string) {
 
 	await browser.close();
 	return {
+		status,
 		bodyText,
 		html,
-		status,
 	};
 }
