@@ -1,12 +1,10 @@
+import { collectDestinationInfo } from '@/helpers/browser-render';
 import { WorkflowEntrypoint, WorkflowEvent, WorkflowStep } from 'cloudflare:workers';
 
-export class DestinationEvaluationWorkflow extends WorkflowEntrypoint<Env, unknown> {
-	async run(event: Readonly<WorkflowEvent<unknown>>, step: WorkflowStep) {
+export class DestinationEvaluationWorkflow extends WorkflowEntrypoint<Env, DestinationEvaluationParams> {
+	async run(event: Readonly<WorkflowEvent<DestinationEvaluationParams>>, step: WorkflowStep) {
 		const collectedData = await step.do('Collect rendered destination page data', async () => {
-			console.log('Collecting rendered destination page data');
-			return {
-				dummy: 'data',
-			};
+			return collectDestinationInfo(this.env, event.payload.destinationUrl);
 		});
 
 		console.log(collectedData);
