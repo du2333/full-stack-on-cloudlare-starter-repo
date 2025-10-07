@@ -1,8 +1,9 @@
-import { WorkerEntrypoint } from 'cloudflare:workers';
-import { App } from './hono/app';
+import { App } from '@/hono/app';
+import { handleLinkClick } from '@/queue-handlers/link-clicks';
 import { initDatabase } from '@repo/data-ops/database';
 import { QueueMessageSchema } from '@repo/data-ops/zod-schema/queue';
-import { handleLinkClick } from './queue-handlers/link-clicks';
+import { WorkerEntrypoint } from 'cloudflare:workers';
+export { DestinationEvaluationWorkflow } from '@/workflows/destination_evaluation_workflow';
 
 export default class DataService extends WorkerEntrypoint<Env> {
 	constructor(ctx: ExecutionContext, env: Env) {
