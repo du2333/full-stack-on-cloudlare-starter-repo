@@ -1,4 +1,4 @@
-import { getDestinationFromLinkInfo, getRoutingDestination } from '@/helpers/route-ops';
+import { captureLinkClickInBackground, getDestinationFromLinkInfo, getRoutingDestination } from '@/helpers/route-ops';
 import { cloudflareInfoSchema } from '@repo/data-ops/zod-schema/links';
 import { LinkClickMessageType } from '@repo/data-ops/zod-schema/queue';
 import { Hono } from 'hono';
@@ -34,7 +34,13 @@ App.get('/:id', async (c) => {
 		},
 	};
 	// this ensures the redirect happens immediately and the message is sent in the background
-	c.executionCtx.waitUntil(c.env.QUEUE.send(queueMessage));
+	c.executionCtx.waitUntil(captureLinkClickInBackground(c.env, queueMessage));
 	return c.redirect(destination);
 });
 
+App.get('/link-click/:accountId', async (c) => {
+	const accountId = c.req.param('accountId');
+	const doId = c.env.LINK_CLICK_TRACKER_OBJECT.idFromName(accountId);
+	const stub = c.env.LINK_CLICK_TRACKER_OBJECT.get(doId);
+	return await stub.fetch(c.req.raw);
+});
