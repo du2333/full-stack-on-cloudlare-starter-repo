@@ -18,7 +18,7 @@ export const evaluationsTrpcRoutes = t.router({
         })
         .optional()
     )
-    .query(async ({ ctx, input }) => {
+    .query(async ({ ctx: _, input }) => {
       const evaluations = await getEvaluations(
         "testaccountid",
         input?.createdBefore
