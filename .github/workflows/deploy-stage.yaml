@@ -21,7 +21,7 @@ jobs:
 
             - name: Deploy
               run: |
-                  pnpm run deploy-stage-frontend && pnpm run deploy-stage-data-service
+                  pnpm run stage:deploy-frontend && pnpm run stage:deploy-data-service
               env:
                   # Cloudflare variables
                   CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
