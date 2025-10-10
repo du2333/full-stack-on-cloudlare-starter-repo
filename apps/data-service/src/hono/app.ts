@@ -2,8 +2,28 @@ import { captureLinkClickInBackground, getDestinationFromLinkInfo, getRoutingDes
 import { cloudflareInfoSchema } from '@repo/data-ops/zod-schema/links';
 import { LinkClickMessageType } from '@repo/data-ops/zod-schema/queue';
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 
 export const App = new Hono<{ Bindings: Env }>();
+
+App.use('*', cors());
+
+App.get('/click-socket', async (c) => {
+	const upgradedHeader = c.req.header('Upgrade');
+	if (!upgradedHeader || upgradedHeader !== 'websocket') {
+		return c.text('Expected Upgrade: websocket', 426);
+	}
+
+	// const accountId = c.req.header('account-id');
+	const accountId = '1234567890';
+	if (!accountId) {
+		return c.text('No Header Account-Id provided', 404);
+	}
+
+	const doId = c.env.LINK_CLICK_TRACKER_OBJECT.idFromName(accountId);
+	const stub = c.env.LINK_CLICK_TRACKER_OBJECT.get(doId);
+	return await stub.fetch(c.req.raw);
+});
 
 App.get('/:id', async (c) => {
 	const id = c.req.param('id');
@@ -36,11 +56,4 @@ App.get('/:id', async (c) => {
 	// this ensures the redirect happens immediately and the message is sent in the background
 	c.executionCtx.waitUntil(captureLinkClickInBackground(c.env, queueMessage));
 	return c.redirect(destination);
-});
-
-App.get('/link-click/:accountId', async (c) => {
-	const accountId = c.req.param('accountId');
-	const doId = c.env.LINK_CLICK_TRACKER_OBJECT.idFromName(accountId);
-	const stub = c.env.LINK_CLICK_TRACKER_OBJECT.get(doId);
-	return await stub.fetch(c.req.raw);
 });
