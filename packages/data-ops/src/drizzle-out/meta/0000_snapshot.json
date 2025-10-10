@@ -113,6 +113,20 @@
       },
       "compositePrimaryKeys": {},
       "indexes": {
+        "idx_link_clicks_clicked_time": {
+          "name": "idx_link_clicks_clicked_time",
+          "columns": [
+            "clicked_time"
+          ],
+          "isUnique": false
+        },
+        "idx_link_clicks_account_id": {
+          "name": "idx_link_clicks_account_id",
+          "columns": [
+            "account_id"
+          ],
+          "isUnique": false
+        },
         "idx_link_clicks_id": {
           "name": "idx_link_clicks_id",
           "columns": [
@@ -180,7 +194,16 @@
         }
       },
       "compositePrimaryKeys": {},
-      "indexes": {},
+      "indexes": {
+        "idx_destination_evaluations_account_time": {
+          "name": "idx_destination_evaluations_account_time",
+          "columns": [
+            "account_id",
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}

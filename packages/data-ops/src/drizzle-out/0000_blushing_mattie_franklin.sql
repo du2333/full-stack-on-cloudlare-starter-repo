@@ -20,6 +20,8 @@ CREATE TABLE `link_clicks` (
 	`longitude` real
 );
 --> statement-breakpoint
+CREATE INDEX `idx_link_clicks_clicked_time` ON `link_clicks` (`clicked_time`);--> statement-breakpoint
+CREATE INDEX `idx_link_clicks_account_id` ON `link_clicks` (`account_id`);--> statement-breakpoint
 CREATE INDEX `idx_link_clicks_id` ON `link_clicks` (`id`);--> statement-breakpoint
 CREATE TABLE `destination_evaluations` (
 	`id` text PRIMARY KEY,
@@ -30,5 +32,6 @@ CREATE TABLE `destination_evaluations` (
 	`reason` text NOT NULL,
 	`created_at` numeric DEFAULT (CURRENT_TIMESTAMP) NOT NULL
 );
-
+--> statement-breakpoint
+CREATE INDEX `idx_destination_evaluations_account_time` ON `destination_evaluations` (`account_id`,`created_at`);
 */
