@@ -12,7 +12,7 @@ let auth: ReturnType<typeof betterAuth>;
 
 export function createBetterAuth(
   database: NonNullable<Parameters<typeof betterAuth>[0]>["database"],
-  github?: {
+  google?: {
     clientId: string;
     clientSecret: string;
   }
@@ -23,15 +23,15 @@ export function createBetterAuth(
       enabled: false,
     },
     socialProviders: {
-      github: {
-        clientId: github?.clientId ?? "",
-        clientSecret: github?.clientSecret ?? "",
+      google: {
+        clientId: google?.clientId ?? "",
+        clientSecret: google?.clientSecret ?? "",
       },
     },
   });
 }
 
-export function getAuth(github: {
+export function getAuth(google: {
   clientId: string;
   clientSecret: string;
 }): ReturnType<typeof betterAuth> {
@@ -47,7 +47,7 @@ export function getAuth(github: {
         verification,
       },
     }),
-    github
+    google
   );
 
   return auth;
