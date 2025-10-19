@@ -28,5 +28,9 @@ jobs:
                   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   VITE_BASE_HOST: ${{ vars.VITE_BASE_HOST_STAGE }}
                   CLOUDFLARE_ENV: stage
-                  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-                  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+
+            - name: Set runtime secrets
+              run: |
+                  cd apps/user-application
+                  pnpm wrangler secret put GOOGLE_CLIENT_ID --env stage <<< "${{ secrets.GOOGLE_CLIENT_ID }}"
+                  pnpm wrangler secret put GOOGLE_CLIENT_SECRET --env stage <<< "${{ secrets.GOOGLE_CLIENT_SECRET }}"
