@@ -29,8 +29,3 @@ jobs:
                   VITE_BASE_HOST: ${{ vars.VITE_BASE_HOST_STAGE }}
                   CLOUDFLARE_ENV: stage
 
-            - name: Set runtime secrets
-              run: |
-                  cd apps/user-application
-                  pnpm wrangler secret put GOOGLE_CLIENT_ID --env stage <<< "${{ secrets.GOOGLE_CLIENT_ID }}"
-                  pnpm wrangler secret put GOOGLE_CLIENT_SECRET --env stage <<< "${{ secrets.GOOGLE_CLIENT_SECRET }}"
