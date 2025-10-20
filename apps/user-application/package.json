@@ -11,7 +11,8 @@
     "test": "vitest run",
     "cf-typegen": "wrangler types --env-interface Env --env stage",
     "stage:deploy": "npm run build && wrangler deploy",
-    "production:deploy": "npm run production:build && wrangler deploy"
+    "production:deploy": "npm run production:build && wrangler deploy",
+    "stripe:webhook": "stripe listen --forward-to localhost:3000/api/auth/stripe/webhook"
   },
   "dependencies": {
     "@better-auth/stripe": "1.3.4",

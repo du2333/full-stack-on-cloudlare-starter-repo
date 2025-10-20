@@ -1,14 +1,15 @@
+import { stripe } from "@better-auth/stripe";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import Stripe from "stripe";
 import { getDb } from "./db/database";
 import {
   account,
   session,
+  subscription,
   user,
   verification,
 } from "./drizzle-out/auth-schema";
-import Stripe from "stripe";
-import { stripe } from "@better-auth/stripe";
 
 let auth: ReturnType<typeof betterAuth>;
 
@@ -75,6 +76,7 @@ export function getAuth(
         session,
         account,
         verification,
+        subscription,
       },
     }),
     stripeConfig,
