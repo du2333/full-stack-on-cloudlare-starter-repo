@@ -1,9 +1,9 @@
+import { getAuth } from "@repo/data-ops/auth";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { Hono } from "hono";
+import { createMiddleware } from "hono/factory";
 import { createContext } from "../trpc/context";
 import { appRouter } from "../trpc/router";
-import { getAuth } from "@repo/data-ops/auth";
-import { createMiddleware } from "hono/factory";
 
 export const App = new Hono<{
   Bindings: ServiceBindings;
@@ -11,10 +11,30 @@ export const App = new Hono<{
 }>();
 
 const getAuthInstance = (env: Env) => {
-  return getAuth({
-    clientId: env.GOOGLE_CLIENT_ID,
-    clientSecret: env.GOOGLE_CLIENT_SECRET,
-  });
+  return getAuth(
+    {
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    },
+    {
+      stripeWebhookSecret: "",
+      stripeApiKey: env.STRIPE_SECRET_KEY,
+      plans: [
+        {
+          name: "basic",
+          priceId: env.STRIPE_PRODUCT_BASIC,
+        },
+        {
+          name: "pro",
+          priceId: env.STRIPE_PRODUCT_PRO,
+        },
+        {
+          name: "enterprise",
+          priceId: env.STRIPE_PRODUCT_ENTERPRICE,
+        },
+      ],
+    }
+  );
 };
 
 const authMiddleware = createMiddleware(async (c, next) => {

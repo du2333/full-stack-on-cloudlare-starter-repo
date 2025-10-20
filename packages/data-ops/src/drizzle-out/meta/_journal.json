@@ -8,6 +8,13 @@
       "when": 1760846336540,
       "tag": "0000_spooky_kronos",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1760923183793,
+      "tag": "0001_shiny_roland_deschain",
+      "breakpoints": true
     }
   ]
 }
