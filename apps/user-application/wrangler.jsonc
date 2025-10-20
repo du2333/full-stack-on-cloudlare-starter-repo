@@ -25,6 +25,11 @@
   "keep_vars": true,
   "env": {
     "stage": {
+      "vars": {
+        "STRIPE_PRODUCT_BASIC": "price_1RJ0EECVQlUXpoth61dFfdvs",
+        "STRIPE_PRODUCT_PRO": "price_1RJ0EkCVQlUXpoth0Xym3Pib",
+        "STRIPE_PRODUCT_ENTERPRICE": "price_1SK8B1CVQlUXpothj4bS4C9m"
+      },
       "d1_databases": [
         {
           "binding": "DB",
