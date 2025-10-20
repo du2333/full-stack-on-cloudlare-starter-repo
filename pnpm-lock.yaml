@@ -196,8 +196,8 @@ importers:
         specifier: ^2.0.5
         version: 2.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       stripe:
-        specifier: 18.0.0
-        version: 18.0.0
+        specifier: ^18.4.0
+        version: 18.4.0(@types/node@22.15.33)
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -3890,10 +3890,6 @@ packages:
 
   strip-literal@3.0.0:
     resolution: {integrity: sha512-TcccoMhJOM3OebGhSBEmp3UZ2SfDMZUEBdRA/9ynfLi8yYajyWX3JiXArcJt4Umh4vISpspkQIY8ZZoCqjbviA==}
-
-  stripe@18.0.0:
-    resolution: {integrity: sha512-3Fs33IzKUby//9kCkCa1uRpinAoTvj6rJgQ2jrBEysoxEvfsclvXdna1amyEYbA2EKkjynuB4+L/kleCCaWTpA==}
-    engines: {node: '>=12.*'}
 
   stripe@18.4.0:
     resolution: {integrity: sha512-LKFeDnDYo4U/YzNgx2Lc9PT9XgKN0JNF1iQwZxgkS4lOw5NunWCnzyH5RhTlD3clIZnf54h7nyMWkS8VXPmtTQ==}
@@ -7747,11 +7743,6 @@ snapshots:
   strip-literal@3.0.0:
     dependencies:
       js-tokens: 9.0.1
-
-  stripe@18.0.0:
-    dependencies:
-      '@types/node': 22.15.33
-      qs: 6.14.0
 
   stripe@18.4.0(@types/node@22.15.33):
     dependencies:
