@@ -15,6 +15,13 @@
 	},
 	"env": {
 		"stage": {
+			// "routes": [
+			// 	// this will route all requests to xxxx.com/r/* to the data-service
+			// 	{
+			// 		"zone_name": "xxxx.com",
+			// 		"pattern": "xxxx.com/r/*",
+			// 	}
+			// ],
 			"d1_databases": [
 				{
 					"binding": "DB",
