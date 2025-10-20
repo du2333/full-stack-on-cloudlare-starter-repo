@@ -33,7 +33,8 @@ const getAuthInstance = (env: Env) => {
           priceId: env.STRIPE_PRODUCT_ENTERPRICE,
         },
       ],
-    }
+    },
+    env.APP_SECRET
   );
 };
 

@@ -21,6 +21,7 @@ type StripeConfig = {
 
 export function createBetterAuth(
   database: NonNullable<Parameters<typeof betterAuth>[0]>["database"],
+  secret: string,
   stripeConfig?: StripeConfig,
   google?: {
     clientId: string;
@@ -29,6 +30,7 @@ export function createBetterAuth(
 ): ReturnType<typeof betterAuth> {
   return betterAuth({
     database,
+    secret,
     emailAndPassword: {
       enabled: false,
     },
@@ -64,7 +66,8 @@ export function getAuth(
     clientId: string;
     clientSecret: string;
   },
-  stripeConfig: StripeConfig
+  stripeConfig: StripeConfig,
+  secret: string
 ): ReturnType<typeof betterAuth> {
   if (auth) return auth;
 
@@ -79,8 +82,9 @@ export function getAuth(
         subscription,
       },
     }),
+    secret,
     stripeConfig,
-    google
+    google,
   );
 
   return auth;
