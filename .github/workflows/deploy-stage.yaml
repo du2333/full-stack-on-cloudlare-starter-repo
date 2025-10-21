@@ -32,10 +32,10 @@ jobs:
             - name: Set runtime environment variables
               run: |
                   cd apps/user-application
-                  echo ${{ secrets.STRIPE_SECRET_KEY }} > .env
-                  echo ${{ secrets.STRIPE_WEBHOOK_SECRET }} > .env
-                  echo ${{ secrets.GOOGLE_CLIENT_ID }} > .env
-                  echo ${{ secrets.GOOGLE_CLIENT_SECRET }} > .env
+                  echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" > .env
+                  echo "STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }}" >> .env
+                  echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env
+                  echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> .env
                   npx wrangler secret bulk .env --env stage
               env:
                   CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
