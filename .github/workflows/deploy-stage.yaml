@@ -29,3 +29,15 @@ jobs:
                   VITE_BASE_HOST: ${{ vars.VITE_BASE_HOST_STAGE }}
                   CLOUDFLARE_ENV: stage
 
+            - name: Set runtime environment variables
+              run: |
+                  cd apps/user-application
+                  echo ${{ secrets.STRIPE_SECRET_KEY }} > .env.stage
+                  echo ${{ secrets.STRIPE_WEBHOOK_SECRET }} > .env.stage
+                  echo ${{ secrets.GOOGLE_CLIENT_ID }} > .env.stage
+                  echo ${{ secrets.GOOGLE_CLIENT_SECRET }} > .env.stage
+                  npx wrangler secret bulk .env.stage --env stage
+              env:
+                  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  CLOUDFLARE_ENV: stage
